@@ -1,0 +1,87 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include <iomanip>
+#include<math.h>
+#include<string>
+#include<bits/stdc++.h>
+#include<stack>
+using namespace std;
+#define ll long long
+#include <sstream>
+#include<map>
+#define lop(n) for(ll i=0;i<n;i++)
+#define loop(a,b) for(ll i=a;i<b;i++)
+#include <cstring>
+#define MOD 1000000000000000000
+#define en "\n"
+#define F first
+#define S second
+#define inputlist for(ll i=0;i<n;i++) cin>>A[i]
+#define pb(x) push_back(x)
+#define MP make_pair
+#define PI 3.14159265
+
+
+
+
+//fast power
+
+ll fxp(ll base,ll expo)
+{
+    if(expo==0)
+        return 1;
+    if(expo%2==0)
+    {
+        ll c=fxp(base,expo/2);
+        return((c*c)%MOD);
+    }
+    else
+        return((base*fxp(base,expo-1))%MOD);
+}
+
+
+//logic
+
+void solve()
+{
+    cin>>n;
+    ll A[n];
+    ll ans=0;
+    for(ll i=0;i<n;i++)
+    {
+        cin>>A[i];
+        ans+=A[i]-1;
+    }
+    sort(A,A+n);
+    for(ll j=2;j<100001;j++)
+    {
+        ll temp=0;
+        for(ll i=0;i<n;i++){
+            temp+=abs(A[i]-fxp(j,i));
+            if(temp>=ans)
+                break;
+        }
+        if(temp>=ans)
+            break;
+        ans=temp;
+    }
+    cout<<ans<<en;
+}
+
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    //call();
+    int t=1;
+    //cin>>t;
+    for(int z=1;z<=t;z++)
+    {
+        //cout<<"Case #"<<z<<": ";
+        solve();
+        //cout<<en;
+    }
+}
